@@ -79,20 +79,20 @@
 /* Width and height of the scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
-  height: 10px;
+  height: 3px;
 }
 
 /* Track (background) of the scrollbar */
 .no-scrollbar ::-webkit-scrollbar-track {
-  background: #000000;
+  background: #e3e3e3;
 }
 
 /* Handle (thumb) of the scrollbar */
 .no-scrollbar ::-webkit-scrollbar-thumb {
-  background: #000000;
+  background: #e3e3e3;
 }
 
 /* On hover, change the background color of the scrollbar handle */
 .no-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #ece8e8;
+  background: #e3e3e3;
 }
