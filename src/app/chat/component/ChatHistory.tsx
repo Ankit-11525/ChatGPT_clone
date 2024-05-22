@@ -50,13 +50,120 @@ const data = [
     "role": "assistant",
     "content": "You're welcome! If you have any more questions, feel free to ask."
   }
+  ,
+  {
+    "id": 8,
+    "timestamp": "2024-05-23T10:03:10Z",
+    "role": "assistant",
+    "content": "You're welcome! If you have any more questions, feel free to ask."
+  },
+  {
+    "id": 8,
+    "timestamp": "2024-05-23T10:03:10Z",
+    "role": "assistant",
+    "content": "You're welcome! If you have any more questions, feel free to ask."
+  },
+  {
+    "id": 8,
+    "timestamp": "2024-05-23T10:03:10Z",
+    "role": "assistant",
+    "content": "You're welcome! If you have any more questions, feel free to ask."
+  },
+  {
+    "id": 8,
+    "timestamp": "2024-05-23T10:03:10Z",
+    "role": "assistant",
+    "content": "You're welcome! If you have any more questions, feel free to ask."
+  },
+  {
+    "id": 8,
+    "timestamp": "2024-05-23T10:03:10Z",
+    "role": "assistant",
+    "content": "You're welcome! If you have any more questions, feel free to ask."
+  },
+  {
+    "id": 8,
+    "timestamp": "2024-05-23T10:03:10Z",
+    "role": "assistant",
+    "content": "You're welcome! If you have any more questions, feel free to ask."
+  },
+  {
+    "id": 8,
+    "timestamp": "2024-05-23T10:03:10Z",
+    "role": "assistant",
+    "content": "You're welcome! If you have any more questions, feel free to ask."
+  },
+  {
+    "id": 8,
+    "timestamp": "2024-05-23T10:03:10Z",
+    "role": "assistant",
+    "content": "You're welcome! If you have any more questions, feel free to ask."
+  },
+  {
+    "id": 8,
+    "timestamp": "2024-05-23T10:03:10Z",
+    "role": "assistant",
+    "content": "You're welcome! If you have any more questions, feel free to ask."
+  },
+  {
+    "id": 8,
+    "timestamp": "2024-05-23T10:03:10Z",
+    "role": "assistant",
+    "content": "You're welcome! If you have any more questions, feel free to ask."
+  },
+  {
+    "id": 8,
+    "timestamp": "2024-05-23T10:03:10Z",
+    "role": "assistant",
+    "content": "You're welcome! If you have any more questions, feel free to ask."
+  },
+  {
+    "id": 8,
+    "timestamp": "2024-05-23T10:03:10Z",
+    "role": "assistant",
+    "content": "You're welcome! If you have any more questions, feel free to ask."
+  },
+  {
+    "id": 8,
+    "timestamp": "2024-05-23T10:03:10Z",
+    "role": "assistant",
+    "content": "You're welcome! If you have any more questions, feel free to ask."
+  }, {
+    "id": 8,
+    "timestamp": "2024-05-23T10:03:10Z",
+    "role": "assistant",
+    "content": "You're welcome! If you have any more questions, feel free to ask."
+  },
+  {
+    "id": 8,
+    "timestamp": "2024-05-23T10:03:10Z",
+    "role": "assistant",
+    "content": "You're welcome! If you have any more questions, feel free to ask."
+  }, {
+    "id": 8,
+    "timestamp": "2024-05-23T10:03:10Z",
+    "role": "assistant",
+    "content": "You're welcome! If you have any more questions, feel free to ask."
+  },
+  {
+    "id": 8,
+    "timestamp": "2024-05-23T10:03:10Z",
+    "role": "assistant",
+    "content": "You're welcome! If you have any more questions, feel free to ask."
+  },
+  {
+    "id": 8,
+    "timestamp": "2024-05-23T10:03:10Z",
+    "role": "assistant",
+    "content": "You're welcome! If you have any more questions, feel free to ask."
+  }
 ]
 const ChatHistory = (props: Props) => {
   return (
-    <div className='w-[20%] h-screen '>
-      <div className=''>
+    <div className=' h-screen '>
+      <div className=' mt-[50px]   overflow-scroll h-screen no-scrollbar'>
         {
-          data.map((items, key) => { return <div className='rounded hover:bg-customGray cursor-pointer p-2 overflow-hidden w-[220px] whitespace-nowrap text-ellipsis m-1 text-[15px]' key={key}>{items.content}</div> })
+          data.map((items, key) => { return <div className='rounded hover:bg-customGray cursor-pointer p-2 overflow-hidden w-[220px] whitespace-nowrap text-ellipsis m-1 text-[15px] ' key={key}>{items.content}</div> })
         }
       </div>
 

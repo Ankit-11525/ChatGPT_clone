@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 type Props = {}
 
 const page = (props: Props) => {
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(true);
     useEffect(() => {
 
         const body = document.getElementsByTagName('body')
@@ -20,7 +20,7 @@ const page = (props: Props) => {
         <div className='flex flex-column h-screen   '>
             <div className={cn(
                 "transition-all ease-in-out duration-300",
-                show ? "w-[15%] opacity-100" : "w-0 opacity-0"
+                show ? "w-[20%] opacity-100" : "w-0 opacity-0"
             )}>
                 <ChatHistory />
 
