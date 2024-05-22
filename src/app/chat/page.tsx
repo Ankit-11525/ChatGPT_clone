@@ -1,19 +1,35 @@
 "use client"
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import ChatLayout from './component/ChatLayout'
 import ChatHistory from './component/ChatHistory'
+import { PanelRightClose } from 'lucide-react';
+import { cn } from '@/lib/utils';
+
 type Props = {}
 
 const page = (props: Props) => {
-    useEffect(()=>{
-      
-        const body=document.getElementsByTagName('body')
-        body[0].style.overflow="hidden"
-    
+    const [show, setShow] = useState(false);
+    useEffect(() => {
+
+        const body = document.getElementsByTagName('body')
+        body[0].style.overflow = "hidden"
+
     })
+
     return (
         <div className='flex flex-column h-screen   '>
-            <ChatHistory />
+            <div className={cn(
+                "transition-all ease-in-out duration-300",
+                show ? "w-[15%] opacity-100" : "w-0 opacity-0"
+            )}>
+                <ChatHistory />
+
+            </div>
+            <div className='cursor-pointer	relative top-2 m-2 ' onClick={() => { setShow(!show) }}>
+                <PanelRightClose size={20} />
+
+            </div>
+
             <ChatLayout />
 
         </div>
