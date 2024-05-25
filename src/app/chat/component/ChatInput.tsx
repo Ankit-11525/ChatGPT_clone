@@ -82,15 +82,7 @@ export function ChatInput() {
     {
       role: "user",
       content: "Hey, I'm having trouble with my account.",
-    },
-    {
-      role: "agent",
-      content: "What seems to be the problem?",
-    },
-    {
-      role: "user",
-      content: "I can't log in.",
-    },
+    }
   ])
   const [input, setInput] = React.useState("")
   const inputLength = input.trim().length
@@ -99,8 +91,8 @@ export function ChatInput() {
   const handleQuestionUpload = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (inputLength === 0) return
-    setMessages([
-      ...messages,
+    setMessages(prevMessages => [
+      ...prevMessages,
       {
         role: "user",
         content: input,
@@ -110,10 +102,11 @@ export function ChatInput() {
     const formData = new FormData();
     formData.append('question', input);
     console.log('ankit : question is : ', input);
-    
+
+
     try {
-     
-  
+
+
       const config = {
         withCredentials: true,
         headers: {
@@ -121,7 +114,14 @@ export function ChatInput() {
         },
       };
       const response = await axios.post('/api/addquestion', input, config);
-      console.log(response.data);
+         setMessages(prevMessages => [
+          ...prevMessages,
+          {
+            role: "agent",
+            content: response.data.mainResponse[0].answer_desc
+          },
+        ])
+      
     } catch (error) {
       console.error(error);
     }
