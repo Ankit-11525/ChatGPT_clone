@@ -1,21 +1,75 @@
 import { NextResponse, NextRequest } from "next/server";
 import { supabase } from "../../../lib/supabase"
+import { run } from "@/lib/utils"
 
 export async function POST(req: NextRequest, res: NextResponse) {
     try {
+        let mainResponse: any[] = [];
         const formaData = await req.json();
         console.log(formaData);
+        const answer = await run(formaData);
+        console.log(answer);
+
+
+
+
+        const uploadans = await supabase
+            .from('Answers')
+            .insert([
+                {
+                    answer_desc: answer
+                }
+            ]);
+
+        const lastInsertedAnswer = await supabase
+            .from('Answers')
+            .select('*')
+            .order('id', { ascending: false })
+            .limit(1);
+
+        let lastAnswer: any;
+        if (lastInsertedAnswer.error || lastInsertedAnswer.data.length === 0) {
+            lastAnswer = "No last answer inserted"
+        } else {
+            lastAnswer = lastInsertedAnswer.data[0];
+        }
+
+
+
+
         const { data, error } = await supabase
             .from('Questions')
             .insert([
                 {
-                    question_desc: formaData
+                    question_desc: formaData,
+                    ans_id: lastAnswer.id
                 }
             ]);
-            const data1="Data inserted successfully"
-        if (data1) {
-            console.log(data1);
-            const response = await NextResponse.json({ data1 }, { status: 200 })
+        const lastInsertedQuestion = await supabase
+            .from('Questions')
+            .select('*')
+            .order('id', { ascending: false })
+            .limit(1);
+        let lastQuestion: any;
+        if (lastInsertedQuestion.error) {
+            lastQuestion = "No last question inserted"
+        } else {
+            lastQuestion = lastInsertedQuestion.data[0];
+        }
+
+
+
+
+        if (lastAnswer) {
+            mainResponse.push(lastAnswer);
+        }
+        if (lastQuestion) {
+            mainResponse.push(lastQuestion);
+        }
+
+        if (mainResponse) {
+            console.log(mainResponse);
+            const response = await NextResponse.json({ mainResponse }, { status: 200 })
             return response;
         }
         if (error) {
