@@ -1,6 +1,7 @@
 "use client"
 import * as React from "react"
 import { CheckIcon, PaperPlaneIcon, PlusIcon } from "@radix-ui/react-icons"
+import { FaArrowUp } from "react-icons/fa6";
 import axios from "axios"
 import { cn } from "@/lib/utils"
 import {
@@ -130,9 +131,9 @@ export function ChatInput(props: Props) {
     }
   }
   return (
-    <div className="h-screen w-full overflow-scroll " >
-      <Card>
-        <CardHeader className="flex flex-row items-center">
+    <div className="max-h-screen max-w-full p-1" >
+      <Card className="relative flex-1 max-w-full h-screen p-4 bg-chatbg">
+        <CardHeader className="abolute top-0 flex flex-row items-center">
           <div className="flex items-center space-x-4">
             <Avatar>
               <AvatarImage src="/avatars/01.png" alt="Image" />
@@ -160,39 +161,45 @@ export function ChatInput(props: Props) {
             </Tooltip>
           </TooltipProvider>
         </CardHeader>
-        <CardContent className="p-0">
-          <div className=" h-screen overflow-scroll no-scrollbar p-2"  >
-            {messages.map((message, index) => (
-              <div
-                key={index}
-                className={cn("flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm", message.role === "user"
-                  ? "ml-auto bg-primary text-primary-foreground"
-                  : "bg-muted"
-                )}
-              >
-                {message.content}
-              </div>
+        <CardContent className="p-0 w-full h-screen pb-[250px]">
+          <div className="h-full overflow-y-scroll no-scrollbar max-w-full p-2"  >
+            <div className="max-w-full flex flex-col gap-2">
+              {messages.map((message, index) => (
+                <div
+                  key={index}
+                  className={cn("flex w-fit max-w-[75%] rounded-lg px-3 py-2 text-sm", message.role === "user"
+                    ? "ml-auto bg-primary text-primary-foreground"
+                    : "bg-muted"
+                  )}
+                >
+                  {message.content}
+                </div>
             ))}
+            </div>
           </div>
         </CardContent>
-        <CardFooter>
+        <CardFooter className="absolute bottom-0 w-full px-4 xl:px-48 flex flex-col">
           <form
             onSubmit={handleQuestionUpload}
-            className="flex w-full items-center space-x-2"
+            className="flex w-full items-center space-x-2 p-2 border-2 rounded-lg"
           >
             <Input
               id="message"
               placeholder="Type your message..."
-              className="flex-1"
+              className="flex-1 appearance-none outline-none border-0 focus:border-0"
               autoComplete="off"
               value={input}
               onChange={(event) => setInput(event.target.value)}
             />
             <Button type="submit" size="icon" disabled={inputLength === 0}>
-              <PaperPlaneIcon className="h-4 w-4" />
+              {/* <PaperPlaneIcon className="h-4 w-4" /> */}
+              <FaArrowUp className="text-xl bg-opacity-50"/>
               <span className="sr-only">Send</span>
             </Button>
           </form>
+          <div className="text-xs lg:text-sm pt-2">
+            By messaging ChatGPT, you agree to our Terms and have read our Privacy Policy.
+            </div>
         </CardFooter>
       </Card>
       {/* <Dialog open={open} onOpenChange={setOpen}>
