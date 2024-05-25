@@ -3,4 +3,5 @@ export interface Questions {
     created_at: string
     question_desc:string
     ans_id:string
+    user_id:string
 }

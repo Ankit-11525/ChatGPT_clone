@@ -114,7 +114,9 @@ export function ChatInput(props: Props) {
           "Content-Type": "application/json",
         },
       };
-      const response = await axios.post('/api/addquestion', input, config);
+      console.log("User : ",User.id);
+      const userid=User.id;
+      const response = await axios.post('/api/addquestion', {input,userid}, config);
       setMessages(prevMessages => [
         ...prevMessages,
         {

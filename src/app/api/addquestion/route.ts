@@ -5,14 +5,11 @@ import { run } from "@/lib/utils"
 export async function POST(req: NextRequest, res: NextResponse) {
     try {
         let mainResponse: any[] = [];
-        const formaData = await req.json();
-        console.log(formaData);
-        const answer = await run(formaData);
+        const {input,userid} = await req.json();
+        console.log("input" ,input);
+        console.log("user",userid);
+        const answer = await run(input);
         console.log(answer);
-
-
-
-
         const uploadans = await supabase
             .from('Answers')
             .insert([
@@ -41,8 +38,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
             .from('Questions')
             .insert([
                 {
-                    question_desc: formaData,
-                    ans_id: lastAnswer.id
+                    question_desc: input,
+                    ans_id: lastAnswer.id,
+                    user_id:userid
                 }
             ]);
         const lastInsertedQuestion = await supabase

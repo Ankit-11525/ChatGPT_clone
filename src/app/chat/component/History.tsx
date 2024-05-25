@@ -44,7 +44,7 @@ const data = [
 ]
 const History = (props: Props) => {
     const [questions, setQuestions] = useState<any[]>([]);
-
+    console.log(props.User);
     const [show,setShow]=useState<boolean>(true);
     // const theme=localStorage.getItem("theme")==='light';
     const [theme, setTheme] = useState<boolean>(true);
@@ -59,7 +59,7 @@ const History = (props: Props) => {
             try {
                 const { data: questionsData, error } = await supabase
                     .from('Questions')
-                    .select('*')
+                    .select('*').eq('user_id', props.User.id)
                     .order('created_at', { ascending: false })
                     .limit(20);
     
