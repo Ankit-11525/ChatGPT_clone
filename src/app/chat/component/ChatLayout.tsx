@@ -25,7 +25,7 @@ const chatHistory = [
 const ChatLayout = (props: Props) => {
 
   return (
-    <div className='h-screen w-full  '>
+    <div className='h-screen w-full   '>
       <ChatInput User={props.User}/>
     </div>
   )

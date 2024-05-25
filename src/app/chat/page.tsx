@@ -22,6 +22,8 @@ const Page = (props: Props) => {
             try {
                 const response = await axios.get('/api/me');
                 setUser(response.data);
+                console.log(response);
+                
 
             } catch (error) {
                 router.push('/');
@@ -44,9 +46,9 @@ const Page = (props: Props) => {
                 <PanelRightClose size={20} />
 
             </div> */}
-            <History User={User}/>
-
-            <ChatLayout User={User} />
+           <div>{User&&<History User={User}/>}</div> 
+           <div className=' w-full'>{User&& <ChatLayout User={User} />}</div>
+           
 
         </div>
     )

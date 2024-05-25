@@ -70,8 +70,8 @@ const users = [
 type User = (typeof users)[number]
 type Props = {}
 export function ChatInput(props: Props) {
+  console.log(props);
   const User = props.User;
-  console.log(User.username);
   const [open, setOpen] = React.useState(false)
   const [selectedUsers, setSelectedUsers] = React.useState<User[]>([])
 
@@ -128,7 +128,7 @@ export function ChatInput(props: Props) {
     }
   }
   return (
-    <div className="h-screen w-full overflow-scroll" >
+    <div className="h-screen w-full overflow-scroll " >
       <Card>
         <CardHeader className="flex flex-row items-center">
           <div className="flex items-center space-x-4">
