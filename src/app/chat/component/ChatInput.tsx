@@ -1,7 +1,7 @@
 "use client"
 import * as React from "react"
 import { CheckIcon, PaperPlaneIcon, PlusIcon } from "@radix-ui/react-icons"
-
+import axios from "axios"
 import { cn } from "@/lib/utils"
 import {
   Avatar,
@@ -70,6 +70,7 @@ const users = [
 type User = (typeof users)[number]
 
 export function ChatInput() {
+
   const [open, setOpen] = React.useState(false)
   const [selectedUsers, setSelectedUsers] = React.useState<User[]>([])
 
@@ -94,8 +95,39 @@ export function ChatInput() {
   const [input, setInput] = React.useState("")
   const inputLength = input.trim().length
 
+
+  const handleQuestionUpload = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    if (inputLength === 0) return
+    setMessages([
+      ...messages,
+      {
+        role: "user",
+        content: input,
+      },
+    ])
+    setInput("")
+    const formData = new FormData();
+    formData.append('question', input);
+    console.log('ankit : question is : ', input);
+    
+    try {
+     
+  
+      const config = {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const response = await axios.post('/api/addquestion', input, config);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
   return (
-    <div  className="h-screen w-full overflow-scroll" >
+    <div className="h-screen w-full overflow-scroll" >
       <Card>
         <CardHeader className="flex flex-row items-center">
           <div className="flex items-center space-x-4">
@@ -130,9 +162,9 @@ export function ChatInput() {
             {messages.map((message, index) => (
               <div
                 key={index}
-                className={cn("flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm",              message.role === "user"
-                    ? "ml-auto bg-primary text-primary-foreground"
-                    : "bg-muted"
+                className={cn("flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm", message.role === "user"
+                  ? "ml-auto bg-primary text-primary-foreground"
+                  : "bg-muted"
                 )}
               >
                 {message.content}
@@ -142,18 +174,7 @@ export function ChatInput() {
         </CardContent>
         <CardFooter>
           <form
-            onSubmit={(event) => {
-              event.preventDefault()
-              if (inputLength === 0) return
-              setMessages([
-                ...messages,
-                {
-                  role: "user",
-                  content: input,
-                },
-              ])
-              setInput("")
-            }}
+            onSubmit={handleQuestionUpload}
             className="flex w-full items-center space-x-2"
           >
             <Input
