@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
+import axios from "axios";
 import {
     Card,
     CardContent,
@@ -27,25 +27,31 @@ const page = (props: Props) => {
     const [password, setPassword] = useState("");
     const handleSubmit = async (event: any) => {
         event.preventDefault();
-        console.log(email+" "+" "+password)
-        // try {
-        //     const response = await PostData({ email, password }, "/api/login")
-           
-        //     toast({
-        //         description: "Your user account has been successfully created.",
-        //       })
-        //     router.push("/")
-        // }
-        // catch (error) {
-        //     let errorMessage = "There was a problem creating your account. Please try again later.";
+        console.log(email + " " + " " + password)
+        try {
+            const config = {
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            };
+            const response = await axios.post('/api/signin', { email, password }, config);
 
-        //     toast({
-        //         variant: "destructive",
-        //         title: "Error",
-        //         description: errorMessage,
-        //         action: <ToastAction altText="Try again">Try again</ToastAction>,
-        //     });
-        // }
+            toast({
+                description: "Your user account has been successfully created.",
+            })
+            router.push("/chat")
+        }
+        catch (error) {
+            let errorMessage = "There was a problem creating your account. Please try again later.";
+
+            toast({
+                variant: "destructive",
+                title: "Error",
+                description: errorMessage,
+                action: <ToastAction altText="Try again">Try again</ToastAction>,
+            });
+        }
     }
     return (
         <div className="flex h-screen items-center justify-center">
