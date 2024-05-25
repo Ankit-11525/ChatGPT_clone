@@ -1,7 +1,15 @@
 import React from 'react'
 import { ChatInput } from './ChatInput';
 
-type Props = {}
+type User = {
+  id: string;
+  username: string;
+  email: string;
+};
+
+type Props = {
+  User: User;
+}; 
 const chatHistory = [
   {
       question: "Hello!",

@@ -10,7 +10,8 @@ type User = {
 
 type Props = {
     User: User;
-}; const data = [
+}; 
+const data = [
     {
         "id": 1,
         "timestamp": "2024-05-23T10:00:00Z",
