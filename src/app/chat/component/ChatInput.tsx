@@ -149,7 +149,7 @@ export function ChatInput() {
                   className="ml-auto rounded-full"
                   onClick={() => setOpen(true)}
                 >
-                  <PlusIcon className="h-4 w-4" />
+                  <PlusIcon className="h-4 w-4" onClick={()=>setMessages([])} />
                   <span className="sr-only">New Chat</span>
                 </Button>
               </TooltipTrigger>
