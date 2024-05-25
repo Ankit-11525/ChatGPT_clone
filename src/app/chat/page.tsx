@@ -9,8 +9,9 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 type Props = {}
 
-const page = (props: Props) => {
+const Page = (props: Props) => {
     const router = useRouter();
+
     const [show, setShow] = useState(true);
     const [User, setUser] = useState(null);
     useEffect(() => {
@@ -51,4 +52,4 @@ const page = (props: Props) => {
     )
 }
 
-export default page
+export default Page;

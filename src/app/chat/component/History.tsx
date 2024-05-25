@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { PanelRightClose } from 'lucide-react'
+import {supabase} from "../../../lib/supabase"
 import { cn } from '@/lib/utils'
 type Props = {}
 const data = [
@@ -38,135 +39,46 @@ const data = [
         "timestamp": "2024-05-23T10:02:30Z",
         "role": "assistant",
         "content": "Absolutely! Here are a few tips to get started with programming:\n1. Choose a programming language that suits your goals.\n2. Practice regularly by building small projects.\n3. Make use of online resources and communities.\n4. Don't be afraid to ask for help when you get stuck.\n5. Keep learning and stay curious!"
-    },
-    {
-        "id": 7,
-        "timestamp": "2024-05-23T10:03:00Z",
-        "role": "user",
-        "content": "Thanks! I'll follow your advice."
-    },
-    {
-        "id": 8,
-        "timestamp": "2024-05-23T10:03:10Z",
-        "role": "assistant",
-        "content": "You're welcome! If you have any more questions, feel free to ask."
     }
-    ,
-    {
-        "id": 8,
-        "timestamp": "2024-05-23T10:03:10Z",
-        "role": "assistant",
-        "content": "You're welcome! If you have any more questions, feel free to ask."
-    },
-    {
-        "id": 8,
-        "timestamp": "2024-05-23T10:03:10Z",
-        "role": "assistant",
-        "content": "You're welcome! If you have any more questions, feel free to ask."
-    },
-    {
-        "id": 8,
-        "timestamp": "2024-05-23T10:03:10Z",
-        "role": "assistant",
-        "content": "You're welcome! If you have any more questions, feel free to ask."
-    },
-    {
-        "id": 8,
-        "timestamp": "2024-05-23T10:03:10Z",
-        "role": "assistant",
-        "content": "You're welcome! If you have any more questions, feel free to ask."
-    },
-    {
-        "id": 8,
-        "timestamp": "2024-05-23T10:03:10Z",
-        "role": "assistant",
-        "content": "You're welcome! If you have any more questions, feel free to ask."
-    },
-    {
-        "id": 8,
-        "timestamp": "2024-05-23T10:03:10Z",
-        "role": "assistant",
-        "content": "You're welcome! If you have any more questions, feel free to ask."
-    },
-    {
-        "id": 8,
-        "timestamp": "2024-05-23T10:03:10Z",
-        "role": "assistant",
-        "content": "You're welcome! If you have any more questions, feel free to ask."
-    },
-    {
-        "id": 8,
-        "timestamp": "2024-05-23T10:03:10Z",
-        "role": "assistant",
-        "content": "You're welcome! If you have any more questions, feel free to ask."
-    },
-    {
-        "id": 8,
-        "timestamp": "2024-05-23T10:03:10Z",
-        "role": "assistant",
-        "content": "You're welcome! If you have any more questions, feel free to ask."
-    },
-    {
-        "id": 8,
-        "timestamp": "2024-05-23T10:03:10Z",
-        "role": "assistant",
-        "content": "You're welcome! If you have any more questions, feel free to ask."
-    },
-    {
-        "id": 8,
-        "timestamp": "2024-05-23T10:03:10Z",
-        "role": "assistant",
-        "content": "You're welcome! If you have any more questions, feel free to ask."
-    },
-    {
-        "id": 8,
-        "timestamp": "2024-05-23T10:03:10Z",
-        "role": "assistant",
-        "content": "You're welcome! If you have any more questions, feel free to ask."
-    },
-    {
-        "id": 8,
-        "timestamp": "2024-05-23T10:03:10Z",
-        "role": "assistant",
-        "content": "You're welcome! If you have any more questions, feel free to ask."
-    }, {
-        "id": 8,
-        "timestamp": "2024-05-23T10:03:10Z",
-        "role": "assistant",
-        "content": "You're welcome! If you have any more questions, feel free to ask."
-    },
-    {
-        "id": 8,
-        "timestamp": "2024-05-23T10:03:10Z",
-        "role": "assistant",
-        "content": "You're welcome! If you have any more questions, feel free to ask."
-    }, {
-        "id": 8,
-        "timestamp": "2024-05-23T10:03:10Z",
-        "role": "assistant",
-        "content": "You're welcome! If you have any more questions, feel free to ask."
-    },
-    {
-        "id": 8,
-        "timestamp": "2024-05-23T10:03:10Z",
-        "role": "assistant",
-        "content": "You're welcome! If you have any more questions, feel free to ask."
-    },
-    {
-        "id": 8,
-        "timestamp": "2024-05-23T10:03:10Z",
-        "role": "assistant",
-        "content": "You're welcome! If you have any more questions, feel free to ask."
-    }
+
 ]
 const History = (props: Props) => {
-    const [show, setShow] = useState<boolean>(true);
+    const [questions, setQuestions] = useState<any[]>([]);
+
+    const [show,setShow]=useState<boolean>(true);
     // const theme=localStorage.getItem("theme")==='light';
     const [theme, setTheme] = useState<boolean>(true);
     useEffect(() => {
         const data: boolean = localStorage.getItem("theme") === "light";
         setTheme(data);
-    }, [theme]);
+
+    },[theme]);
+    useEffect(() => {
+        // Fetch last 10 questions from Supabase
+        const fetchQuestions = async () => {
+            try {
+                const { data: questionsData, error } = await supabase
+                    .from('Questions')
+                    .select('*')
+                    .order('created_at', { ascending: false })
+                    .limit(20);
+    
+                if (error) {
+                    console.error('Error fetching questions:', error);
+                    return;
+                }
+    
+                setQuestions(questionsData || []);
+                
+
+            } catch (error) {
+                console.error('Error fetching questions:', (error as Error).message);
+            }
+        };
+    
+        fetchQuestions();
+    }, []); // Empty dependency array
+   
     return (
         <div>
             <div className=' m-3 cursor-pointer fidex'>
@@ -177,9 +89,10 @@ const History = (props: Props) => {
                 show ? " opacity-100" : "w-0 opacity-0"
             )}>
                 <div className=' h-screen '>
+                    
                     <div className='    overflow-scroll h-screen no-scrollbar'>
                         {
-                            data.map((items, key) => { return <div className={cn("rounded  cursor-pointer p-2 overflow-hidden w-[220px] whitespace-nowrap text-ellipsis m-1 text-[15px] ", theme ? "hover:bg-customGray" : "hover:bg-muted")} key={key}>{items.content}</div> })
+                            questions.map((items, key) => { return <div className={cn("rounded  cursor-pointer p-2 overflow-hidden w-[220px] whitespace-nowrap text-ellipsis m-1 text-[15px] ",theme?"hover:bg-customGray":"hover:bg-muted") } key={key}>{items.question_desc}</div> })
                         }
                     </div>
 
