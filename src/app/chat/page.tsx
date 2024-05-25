@@ -4,7 +4,7 @@ import ChatLayout from './component/ChatLayout'
 import ChatHistory from './component/ChatHistory'
 import { PanelRightClose } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
+import History from './component/History';
 type Props = {}
 
 const page = (props: Props) => {
@@ -18,7 +18,7 @@ const page = (props: Props) => {
 
     return (
         <div className='flex flex-column h-screen   '>
-            <div className={cn(
+            {/* <div className={cn(
                 "transition-all ease-in-out duration-300",
                 show ? "w-[20%] opacity-100" : "w-0 opacity-0"
             )}>
@@ -28,7 +28,8 @@ const page = (props: Props) => {
             <div className='cursor-pointer	relative top-2 m-2 ' onClick={() => { setShow(!show) }}>
                 <PanelRightClose size={20} />
 
-            </div>
+            </div> */}
+            <History/>
 
             <ChatLayout />
 

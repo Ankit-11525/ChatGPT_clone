@@ -97,7 +97,7 @@ export function ChatInput() {
   return (
     <div  className="h-screen w-full overflow-scroll" >
       <Card>
-        {/* <CardHeader className="flex flex-row items-center">
+        <CardHeader className="flex flex-row items-center">
           <div className="flex items-center space-x-4">
             <Avatar>
               <AvatarImage src="/avatars/01.png" alt="Image" />
@@ -118,13 +118,13 @@ export function ChatInput() {
                   onClick={() => setOpen(true)}
                 >
                   <PlusIcon className="h-4 w-4" />
-                  <span className="sr-only">New message</span>
+                  <span className="sr-only">New Chat</span>
                 </Button>
               </TooltipTrigger>
-              <TooltipContent sideOffset={10}>New message</TooltipContent>
+              <TooltipContent sideOffset={10}>New Chat</TooltipContent>
             </Tooltip>
           </TooltipProvider>
-        </CardHeader> */}
+        </CardHeader>
         <CardContent className="p-0">
           <div className=" h-screen overflow-scroll no-scrollbar p-2"  >
             {messages.map((message, index) => (
