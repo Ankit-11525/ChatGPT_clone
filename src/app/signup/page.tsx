@@ -51,7 +51,7 @@ export default function Page() {
             setEmail("");
             setName("")
             setUsername("")
-            router.push("/")
+            router.push("/chat")
         }
         catch (error) {
             let errorMessage = "There was a problem creating your account. Please try again later.";
