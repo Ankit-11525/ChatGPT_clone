@@ -80,22 +80,21 @@ const History = (props: Props) => {
     }, []); // Empty dependency array
    
     return (
-        <div>
-            <div className=' m-3 cursor-pointer fidex'>
+        <div className='p-4 h-screen'>
+            <div className='relative top-0 cursor-pointer fidex p-2 pb-4'>
                 <PanelRightClose size={20} onClick={() => { setShow(!show) }} />
             </div>
             <div className={cn(
                 "transition-all ease-in-out duration-300 ",
                 show ? " opacity-100" : "w-0 opacity-0"
             )}>
-                <div className=' h-screen '>
-                    
-                    <div className='    overflow-scroll h-screen no-scrollbar'>
-                        {
-                            questions.map((items, key) => { return <div className={cn("rounded  cursor-pointer p-2 overflow-hidden w-[220px] whitespace-nowrap text-ellipsis m-1 text-[15px] ",theme?"hover:bg-customGray":"hover:bg-muted") } key={key}>{items.question_desc}</div> })
-                        }
-                    </div>
-
+                <div className='p-2 py-4 font-bold border-y-2'>
+                    All Chats
+                </div>
+                <div className='h-full overflow-y-scroll no-scrollbar'>
+                    {
+                        questions.map((items, key) => { return <div className={cn("rounded  cursor-pointer p-2 overflow-hidden w-[220px] whitespace-nowrap text-ellipsis m-1 text-[15px] ",theme?"hover:bg-customGray":"hover:bg-muted") } key={key}>{items.question_desc}</div> })
+                    }
                 </div>
             </div>
 
