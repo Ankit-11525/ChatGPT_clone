@@ -68,8 +68,16 @@ const users = [
   },
 ] as const
 
-type User = (typeof users)[number]
-type Props = {}
+type User = {
+  id: string;
+  username: string;
+  email: string;
+};
+
+type Props = {
+  User: User;
+};
+
 export function ChatInput(props: Props) {
   console.log(props);
   const User = props.User;

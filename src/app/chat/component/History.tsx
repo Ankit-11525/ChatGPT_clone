@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { PanelRightClose } from 'lucide-react'
-import {supabase} from "../../../lib/supabase"
+import { supabase } from "../../../lib/supabase"
 import { cn } from '@/lib/utils'
-type Props = {}
-const data = [
+type User = {
+    id: string;
+    username: string;
+    email: string;
+};
+
+type Props = {
+    User: User;
+}; const data = [
     {
         "id": 1,
         "timestamp": "2024-05-23T10:00:00Z",
@@ -45,14 +52,14 @@ const data = [
 const History = (props: Props) => {
     const [questions, setQuestions] = useState<any[]>([]);
     console.log(props.User);
-    const [show,setShow]=useState<boolean>(true);
+    const [show, setShow] = useState<boolean>(true);
     // const theme=localStorage.getItem("theme")==='light';
     const [theme, setTheme] = useState<boolean>(true);
     useEffect(() => {
         const data: boolean = localStorage.getItem("theme") === "light";
         setTheme(data);
 
-    },[theme]);
+    }, [theme]);
     useEffect(() => {
         // Fetch last 10 questions from Supabase
         const fetchQuestions = async () => {
@@ -62,23 +69,23 @@ const History = (props: Props) => {
                     .select('*').eq('user_id', props.User.id)
                     .order('created_at', { ascending: false })
                     .limit(20);
-    
+
                 if (error) {
                     console.error('Error fetching questions:', error);
                     return;
                 }
-    
+
                 setQuestions(questionsData || []);
-                
+
 
             } catch (error) {
                 console.error('Error fetching questions:', (error as Error).message);
             }
         };
-    
+
         fetchQuestions();
-    }, []); // Empty dependency array
-   
+    }, ); // Empty dependency array
+
     return (
         <div className='p-4 h-screen'>
             <div className='relative top-0 cursor-pointer fidex p-2 pb-4'>
@@ -93,7 +100,7 @@ const History = (props: Props) => {
                 </div>
                 <div className='h-full overflow-y-scroll no-scrollbar'>
                     {
-                        questions.map((items, key) => { return <div className={cn("rounded  cursor-pointer p-2 overflow-hidden w-[220px] whitespace-nowrap text-ellipsis m-1 text-[15px] ",theme?"hover:bg-customGray":"hover:bg-muted") } key={key}>{items.question_desc}</div> })
+                        questions.map((items, key) => { return <div className={cn("rounded  cursor-pointer p-2 overflow-hidden w-[220px] whitespace-nowrap text-ellipsis m-1 text-[15px] ", theme ? "hover:bg-customGray" : "hover:bg-muted")} key={key}>{items.question_desc}</div> })
                     }
                 </div>
             </div>
