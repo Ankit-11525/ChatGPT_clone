@@ -5,17 +5,31 @@ import ChatHistory from './component/ChatHistory'
 import { PanelRightClose } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import History from './component/History';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 type Props = {}
 
 const page = (props: Props) => {
+    const router = useRouter();
     const [show, setShow] = useState(true);
+    const [User, setUser] = useState(null);
     useEffect(() => {
 
         const body = document.getElementsByTagName('body')
         body[0].style.overflow = "hidden"
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('/api/me');
+                setUser(response.data);
 
-    })
+            } catch (error) {
+                router.push('/');
+            }
 
+        }
+        fetchData();
+
+    },[])
     return (
         <div className='flex flex-column h-screen   '>
             {/* <div className={cn(
@@ -29,9 +43,9 @@ const page = (props: Props) => {
                 <PanelRightClose size={20} />
 
             </div> */}
-            <History/>
+            <History User={User}/>
 
-            <ChatLayout />
+            <ChatLayout User={User} />
 
         </div>
     )

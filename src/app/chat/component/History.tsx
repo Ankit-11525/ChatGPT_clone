@@ -160,18 +160,17 @@ const data = [
     }
 ]
 const History = (props: Props) => {
-    const [show,setShow]=useState<boolean>(true);
+    const [show, setShow] = useState<boolean>(true);
     // const theme=localStorage.getItem("theme")==='light';
-    const [theme,setTheme]=useState<boolean>(true);
-    useEffect(()=>{
-        const data:boolean=localStorage.getItem("theme")==="light";
+    const [theme, setTheme] = useState<boolean>(true);
+    useEffect(() => {
+        const data: boolean = localStorage.getItem("theme") === "light";
         setTheme(data);
-    },[theme]);
-   
+    }, [theme]);
     return (
         <div>
             <div className=' m-3 cursor-pointer fidex'>
-                <PanelRightClose size={20} onClick={()=>{setShow(!show)}} />
+                <PanelRightClose size={20} onClick={() => { setShow(!show) }} />
             </div>
             <div className={cn(
                 "transition-all ease-in-out duration-300 ",
@@ -180,7 +179,7 @@ const History = (props: Props) => {
                 <div className=' h-screen '>
                     <div className='    overflow-scroll h-screen no-scrollbar'>
                         {
-                            data.map((items, key) => { return <div className={cn("rounded  cursor-pointer p-2 overflow-hidden w-[220px] whitespace-nowrap text-ellipsis m-1 text-[15px] ",theme?"hover:bg-customGray":"hover:bg-muted") } key={key}>{items.content}</div> })
+                            data.map((items, key) => { return <div className={cn("rounded  cursor-pointer p-2 overflow-hidden w-[220px] whitespace-nowrap text-ellipsis m-1 text-[15px] ", theme ? "hover:bg-customGray" : "hover:bg-muted")} key={key}>{items.content}</div> })
                         }
                     </div>
 

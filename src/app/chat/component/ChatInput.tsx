@@ -68,9 +68,10 @@ const users = [
 ] as const
 
 type User = (typeof users)[number]
-
-export function ChatInput() {
-
+type Props = {}
+export function ChatInput(props: Props) {
+  const User = props.User;
+  console.log(User.username);
   const [open, setOpen] = React.useState(false)
   const [selectedUsers, setSelectedUsers] = React.useState<User[]>([])
 
@@ -114,14 +115,14 @@ export function ChatInput() {
         },
       };
       const response = await axios.post('/api/addquestion', input, config);
-         setMessages(prevMessages => [
-          ...prevMessages,
-          {
-            role: "agent",
-            content: response.data.mainResponse[0].answer_desc
-          },
-        ])
-      
+      setMessages(prevMessages => [
+        ...prevMessages,
+        {
+          role: "agent",
+          content: response.data.mainResponse[0].answer_desc
+        },
+      ])
+
     } catch (error) {
       console.error(error);
     }
@@ -136,8 +137,8 @@ export function ChatInput() {
               <AvatarFallback>OM</AvatarFallback>
             </Avatar>
             <div>
-              <p className="text-sm font-medium leading-none">Sofia Davis</p>
-              <p className="text-sm text-muted-foreground">m@example.com</p>
+              <p className="text-sm font-medium leading-none">{User.username}</p>
+              <p className="text-sm text-muted-foreground">{User.email}</p>
             </div>
           </div>
           <TooltipProvider delayDuration={0}>
