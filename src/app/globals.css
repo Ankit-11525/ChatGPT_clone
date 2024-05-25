@@ -6,6 +6,7 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
+    --bg-for-chats: transparent;
 
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
@@ -36,8 +37,9 @@
   }
 
   .dark {
-    --background: 240 10% 3.9%;
+    --background: #171717;
     --foreground: 0 0% 98%;
+    --bg-for-chats: #212121;
 
     --card: 240 10% 3.9%;
     --card-foreground: 0 0% 98%;
