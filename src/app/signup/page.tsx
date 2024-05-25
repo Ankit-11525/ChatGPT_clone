@@ -1,4 +1,5 @@
 "use client"
+import axios from "axios";
 import Link from "next/link"
 import { ReloadIcon } from "@radix-ui/react-icons"
 import { useRouter } from 'next/navigation';
@@ -26,35 +27,42 @@ export default function page() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
-    
-    const handleSubmit = async (e:any) => {
-        e.preventDefault()
-        
-        
-        // try {
-        //     setLoading(true)
-        //     const response = await PostData({ email, name, username, password }, "/api/register")
-        //     setLoading(false);
-            
-        //     toast({
-        //         description: "Your user account has been successfully created.",
-        //       })
-        //     setPassword("");
-        //     setEmail("");
-        //     setName("")
-        //     setUsername("")
-        //     router.push("/")
-        // }
-        // catch (error) {
-        //     let errorMessage = "There was a problem creating your account. Please try again later.";
 
-        //     toast({
-        //         variant: "destructive",
-        //         title: "Error",
-        //         description: errorMessage,
-        //         action: <ToastAction altText="Try again">Try again</ToastAction>,
-        //     });
-        // }
+
+    const handleSubmit = async (e: any) => {
+        e.preventDefault()
+
+
+        try {
+            setLoading(true)
+            const config = {
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            };
+            const response = await axios.post('/api/signup', { email, name, username, password }, config);
+            setLoading(false);
+
+            toast({
+                description: "Your user account has been successfully created.",
+            })
+            setPassword("");
+            setEmail("");
+            setName("")
+            setUsername("")
+            router.push("/")
+        }
+        catch (error) {
+            let errorMessage = "There was a problem creating your account. Please try again later.";
+
+            toast({
+                variant: "destructive",
+                title: "Error",
+                description: errorMessage,
+                action: <ToastAction altText="Try again">Try again</ToastAction>,
+            });
+        }
     }
     return (
         <div className="flex h-screen items-center  justify-center">
