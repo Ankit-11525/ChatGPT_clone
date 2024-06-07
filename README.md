@@ -1,4 +1,8 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+DEMO VIDEO :
+
+
+https://github.com/Ankit-11525/ChatGPT_clone/assets/76417084/20443c58-0769-43b7-99fa-49cc08bee52e
+
 
 ## Getting Started
 
